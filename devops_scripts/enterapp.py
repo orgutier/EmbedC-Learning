@@ -3,6 +3,11 @@ from time import sleep
 from logger import logger
 import os
 import sys
+import argparse
+
+
+default_reset = 27
+default_boot = 4
 
 log = logger()
 notifyname = None
@@ -28,10 +33,27 @@ if notifyid:
     log.log( level = log.WARN, message = f"Error: {notifyid}")
 
 log.log(level = log.DEBUG, message = f"appname|taskid -- {log.appname}|{log.taskid}",)
-log.log(level = log.INFO, message = "Starting app reset")
 
-reset = 27
-boot = 4
+# ------------ Define pins by parse or default
+parser = argparse.ArgumentParser(
+    description="Enter App mode by setting reset and boot pins")
+parser.add_argument(
+    '--resetpin', 
+    type=int, 
+    default=default_reset, 
+    help='GPIO pin for reset')
+parser.add_argument(
+    '--bootpin', 
+    type=int, 
+    default=default_reset, 
+    help='GPIO pin for reset')
+
+args = parser.parse_args()
+reset = args.resetpin
+reset = args.bootpin
+
+
+log.log(level = log.INFO, message = "Starting app reset")
 # ------------ DEBUG -------------
 log.log(level = log.DEBUG, message = f"Reset pin: {reset}")
 log.log(level = log.DEBUG, message = f"Boot pin: {boot}")
@@ -42,11 +64,11 @@ try:
     gpio.setup(reset, gpio.OUT)
     gpio.setup(boot, gpio.OUT)
 except Exception as e:
-    log.log(level = log.CRITICAL, message = "Unable to set reset/boot pins: {e}")
+    log.log(level = log.CRITICAL, message = f"Unable to set reset/boot pins: {e}")
     sys.exit(1)
 
 try:
-    # Booot and reset pins preconditions
+    # Boot and reset pins preconditions
     gpio.output(reset, gpio.LOW)
     gpio.output(boot, gpio.LOW)
 
@@ -58,11 +80,17 @@ try:
     # Keep boot pin pressed during flash
     # gpio.cleanup()
 except Exception as e:
-    log.log(level = log.CRITICAL, message = "Unable to set gpio transitions: {e}")
+    log.log(level = log.CRITICAL, message = f"Unable to set gpio transitions: {e}")
     log.log( level = log.WARN, message = f"Error: {e}")
     sys.exit(1)
 
 log.log(level = log.INFO, message = "Completed app reset as expected")
+
+try:
+    gpio.cleanup()
+    log.log(level=log.INFO, message="GPIO cleanup successful")
+except Exception as e:
+    log.log(level=log.WARN, message=f"GPIO cleanup failed: {e}")
 
 sys.exit(0)
 
