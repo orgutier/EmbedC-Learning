@@ -43,7 +43,9 @@ group.add_argument(
 args, unknown = parser.parse_known_args()
 
 if args.enterboot:
+    log.log(level = log.INFO, message = f"Calling enterboot script with {unknown} arguments")
     enterboot.main(unknown)
 
 elif args.enterapp:
+    log.log(level = log.INFO, message = f"Calling enterapp script with {unknown} arguments")
     enterapp.main(unknown)
