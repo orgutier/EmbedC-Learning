@@ -50,7 +50,7 @@ parser.add_argument(
 
 args = parser.parse_args()
 reset = args.resetpin
-reset = args.bootpin
+boot = args.bootpin
 
 
 log.log(level = log.INFO, message = "Starting app reset")
