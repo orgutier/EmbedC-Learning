@@ -1,7 +1,7 @@
 import argparse
 import os
 from tools import enterboot, enterapp
-from tools import logger
+from tools.logger import logger
 
 log = logger()
 notifyname = None
