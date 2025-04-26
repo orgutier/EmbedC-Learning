@@ -45,8 +45,8 @@ parser.add_argument(
 parser.add_argument(
     '--bootpin', 
     type=int, 
-    default=default_reset, 
-    help='GPIO pin for reset')
+    default=default_boot, 
+    help='GPIO pin for boot')
 
 args = parser.parse_args()
 reset = args.resetpin
