@@ -26,7 +26,7 @@ class logger:
         self.taskid = ""
         self.appname = ""
         self.logginglevel = 4
-        self.appnamesource = "id" # Can be "id"
+        self.appnamesource = "both" # Can be "id", "name" or "both"
 
     def log(self, level = 4, message = ""):
         # Data validation
@@ -43,7 +43,7 @@ class logger:
         # Add here invalid characters or regex for message
         if '\n' in message:
             message = "Invalid characters in message"
-        if not self.appnamesource in ["name", "id"]:
+        if not self.appnamesource in ["name", "id", "both"]:
             self.appnamesource = "id" # Default ID
         # Get identification data
         formatteddate = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -51,6 +51,8 @@ class logger:
             app = self.appname
         elif self.appnamesource == "id":
             app = self.taskid
+        elif self.appnamesource == "both":
+            app = f"{self.taskid}|{self.appname}"
         loglevel = self.levels[level]
         # Create log string
         logstring = f"[{formatteddate}] [{app}] [{loglevel}] {message}"
