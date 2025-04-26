@@ -21,36 +21,18 @@ except:
     notifyid = True
 
 if notifyname:
-    log.log(
-        level = log.WARN,
-        message = "appname was not defined, using default"
-    )
+    log.log( level = log.WARN, message = "appname was not defined, using default")
 if notifyid:
-    log.log(
-        level = log.WARN,
-        message = "taskid was not defined, using default"
-    )
+    log.log(level = log.WARN, message = "taskid was not defined, using default")
 
-log.log(
-    level = log.DEBUG,
-    message = f"appname|taskid -- {log.appname}|{log.taskid}",
-)
+log.log(level = log.DEBUG, message = f"appname|taskid -- {log.appname}|{log.taskid}",)
+log.log(level = log.INFO, message = "Starting app reset")
 
-log.log(
-    level = log.INFO,
-    message = "Starting app reset"
-)
 reset = 27
 boot = 4
 # ------------ DEBUG -------------
-log.log(
-    level = log.DEBUG,
-    message = f"Reset pin: {reset}"
-)
-log.log(
-    level = log.DEBUG,
-    message = f"Boot pin: {boot}"
-)
+log.log(level = log.DEBUG, message = f"Reset pin: {reset}")
+log.log(level = log.DEBUG, message = f"Boot pin: {boot}")
 
 
 try:
@@ -58,10 +40,7 @@ try:
     gpio.setup(reset, gpio.OUT)
     gpio.setup(boot, gpio.OUT)
 except:
-    log.log(
-        level = log.CRITICAL,
-        message = "Unable to set reset/boot pins"
-    )
+    log.log(level = log.CRITICAL, message = "Unable to set reset/boot pins")
     sys.exit(1)
 
 try:
@@ -77,16 +56,10 @@ try:
     # Keep boot pin pressed during flash
     # gpio.cleanup()
 except:
-    log.log(
-        level = log.CRITICAL,
-        message = "Unable to set gpio transitions"
-    )
+    log.log(level = log.CRITICAL, message = "Unable to set gpio transitions")
     sys.exit(1)
 
-log.log(
-    level = log.INFO,
-    message = "Completed app reset as expected"
-)
+log.log(level = log.INFO, message = "Completed app reset as expected")
 
 sys.exit(0)
 
