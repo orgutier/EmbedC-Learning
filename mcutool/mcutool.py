@@ -28,7 +28,7 @@ if notifyid:
 
 parser = argparse.ArgumentParser(
     description="MCU control tool")
-group = parser.add_manually_exclusive_group(required=True)
+group = parser.add_mutually_exclusive_group(required=True)
 
 group.add_argument(
     '--enterboot', 
