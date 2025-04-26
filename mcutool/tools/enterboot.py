@@ -5,7 +5,7 @@ import os
 import sys
 import argparse
 
-def main():
+def main(args=None):
     default_reset = 27
     default_boot = 4
 
@@ -48,7 +48,10 @@ def main():
         default=default_boot, 
         help='GPIO pin for boot')
 
-    args = parser.parse_args()
+    if args == None:
+        args = sys.argv
+    args = parser.parse_args(args)
+
     reset = args.resetpin
     boot = args.bootpin
 
