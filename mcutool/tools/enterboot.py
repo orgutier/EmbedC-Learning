@@ -1,6 +1,6 @@
 import RPi.GPIO as gpio
 from time import sleep
-from logger import logger
+from tools.logger import logger
 import os
 import sys
 import argparse
