@@ -5,25 +5,27 @@ import os
 import sys
 
 log = logger()
-notifyname = False
-notifyid = False
+notifyname = None
+notifyid = None
 try:
     log.appname = os.path.basename(__file__)
-except:
+except Exception as e:
     # No problem, use default
-    log.appname = "enterboot"
-    notifyname = True
+    log.appname = "enterapp"
+    notifyname = e
 try:
     log.taskid = int(os.getpid())
-except:
+except Exception as e:
     # No problem, use default
     log.taskid = 1111
-    notifyid = True
+    notifyid = e
 
 if notifyname:
     log.log( level = log.WARN, message = "appname was not defined, using default")
+    log.log( level = log.WARN, message = f"Error: {notifyname}")
 if notifyid:
     log.log(level = log.WARN, message = "taskid was not defined, using default")
+    log.log( level = log.WARN, message = f"Error: {notifyid}")
 
 log.log(level = log.DEBUG, message = f"appname|taskid -- {log.appname}|{log.taskid}",)
 log.log(level = log.INFO, message = "Starting app reset")
@@ -39,8 +41,8 @@ try:
     gpio.setmode(gpio.BCM)
     gpio.setup(reset, gpio.OUT)
     gpio.setup(boot, gpio.OUT)
-except:
-    log.log(level = log.CRITICAL, message = "Unable to set reset/boot pins")
+except Exception as e:
+    log.log(level = log.CRITICAL, message = "Unable to set reset/boot pins: {e}")
     sys.exit(1)
 
 try:
@@ -55,8 +57,9 @@ try:
     gpio.output(reset, gpio.LOW)
     # Keep boot pin pressed during flash
     # gpio.cleanup()
-except:
-    log.log(level = log.CRITICAL, message = "Unable to set gpio transitions")
+except Exception as e:
+    log.log(level = log.CRITICAL, message = "Unable to set gpio transitions: {e}")
+    log.log( level = log.WARN, message = f"Error: {e}")
     sys.exit(1)
 
 log.log(level = log.INFO, message = "Completed app reset as expected")
