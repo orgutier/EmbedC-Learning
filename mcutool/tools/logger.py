@@ -25,8 +25,12 @@ class logger:
         # Defaults
         if type(taskid)!=int:
             self.taskid = 0000
-        elif type(appname)!=str:
+        else:
+            self.taskid = taskid
+        if type(appname)!=str:
             self.appname = "NotDefined"
+        else:
+            self.appname = appname
         self.logginglevel = 4
         self.appnamesource = "both" # Can be "id", "name" or "both"
 
