@@ -33,6 +33,7 @@ class logger:
             self.appname = appname
         self.maxapplogged = 25 # The logger will actually print 2 characters less to fit '..' as reference
         self.maxlevellogged = 8
+        self.maxmessagelogged = 100
         self.logginglevel = 4
         self.appnamesource = "both" # Can be "id", "name" or "both"
 
@@ -67,5 +68,15 @@ class logger:
             app = app[:self.maxapplogged-2] + '..'
         alignapp = " "*(self.maxapplogged - len(app))
         alignlevel = " "*(self.maxlevellogged - len(loglevel))
-        logstring = f"[{formatteddate}] [{app}]{alignapp} [{loglevel}]{alignlevel} {message}"
+        # Break message into slided messages based on arbitrary size
+        for idx in range(0, len(message), self.maxmessagelogged):
+            if idx == 0:
+                printed = ''
+            else:
+                printed = '..'
+            if (self.maxmessagelogged + idx) > len(message): # Last chuch of message
+                printed += message[idx:len(message)]
+            else: # This is not the last block or it is equal in size
+                printed += message[idx:self.maxmessagelogged] + '..'
+            logstring = f"[{formatteddate}] [{app}]{alignapp} [{loglevel}]{alignlevel} {printed}"
         print(logstring)
