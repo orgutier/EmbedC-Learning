@@ -95,6 +95,7 @@ def main(args=None):
     except Exception as e:
         log.log(level=log.WARN, message=f"GPIO cleanup failed: {e}")
 
+    log.log(level = log.INFO, message = "Completed app reset as expected")
     sys.exit(0)
 
 if __name__ =='__main__':

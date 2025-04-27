@@ -91,7 +91,7 @@ def main(args=None):
         log.log( level = log.WARN, message = f"Error: {e}")
         sys.exit(1)
 
-    log.log(level = log.INFO, message = "Completed app reset as expected")
+    log.log(level = log.INFO, message = "Completed boot reset as expected")
     log.log(level = log.INFO, message = "Intentionally left pins asserted")
         
     sys.exit(0)
