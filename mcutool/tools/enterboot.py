@@ -50,11 +50,13 @@ def main(args=None):
 
     if args == None:
         args = sys.argv[1:]
-    args = parser.parse_args(args)
-
-    reset = args.resetpin
-    boot = args.bootpin
-
+    try:
+        args = parser.parse_args(args)
+        reset = args.resetpin
+        boot = args.bootpin
+    except Exception as e:
+        log.log(level = log.ERROR, message = f"Unrecognized arguments check spell: {e}")
+        sys.exit(1)
 
     log.log(level = log.INFO, message = "Starting app reset")
     # ------------ DEBUG -------------
