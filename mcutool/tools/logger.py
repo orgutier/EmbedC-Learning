@@ -30,7 +30,7 @@ class logger:
         if type(appname)!=str:
             self.appname = "NotDefined"
         else:
-            self.appname = appname
+            self.appname = appname.split('.py')[-1]
         self.maxapplogged = 25 # The logger will actually print 2 characters less to fit '..' as reference
         self.maxlevellogged = 8
         self.maxmessagelogged = 100
@@ -79,4 +79,4 @@ class logger:
             else: # This is not the last block or it is equal in size
                 printed += message[idx:self.maxmessagelogged] + '..'
             logstring = f"[{formatteddate}] [{app}]{alignapp} [{loglevel}]{alignlevel} {printed}"
-        print(logstring)
+            print(logstring)
