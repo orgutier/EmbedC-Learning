@@ -58,12 +58,15 @@ def main(args=None):
         # Boot and reset pins preconditions
         gpio.output(reset, gpio.LOW)
         gpio.output(boot, gpio.LOW)
+        log.log(level = log.INFO, message = "Pulled reset and boot down")
 
         sleep(1)
         gpio.output(reset, gpio.HIGH)
+        log.log(level = log.INFO, message = "Disabled 3v3en pin via reset")
 
         sleep(1)
         gpio.output(reset, gpio.LOW)
+        log.log(level = log.INFO, message = "Released reset, power back to mcu")
         # Keep boot pin pressed during flash
         # gpio.cleanup()
     except Exception as e:
