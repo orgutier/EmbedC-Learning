@@ -76,7 +76,7 @@ class logger:
                 printed = ''
             else:
                 printed = '... '
-            if (self.maxmessagelogged + idx) > len(message): # Last chuch of message
+            if (self.maxmessagelogged + idx) >= len(message): # Last chuch of message
                 printed += message[idx:len(message)]
             else: # This is not the last block or it is equal in size
                 printed += message[idx:self.maxmessagelogged] + ' ...'
