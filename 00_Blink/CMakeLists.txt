@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 
 project(blink_project)
 
-set(PICO_SDK_PATH ../pico-sdk)
+set(PICO_SDK_PATH $ENV{PICO_SDK_PATH})
 
 include(${PICO_SDK_PATH}/pico_sdk_init.cmake)
 
