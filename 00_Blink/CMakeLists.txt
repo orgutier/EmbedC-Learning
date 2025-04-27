@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 
+set(PICO_PLATFORM rp2040)
+
 project(blink_project)
 
 set(PICO_SDK_PATH $ENV{PICO_SDK_PATH})
