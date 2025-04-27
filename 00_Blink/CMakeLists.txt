@@ -1,24 +1,22 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.13)
 
-set(PICO_PLATFORM rp2040)
+project(blink_rp2350)
 
-project(blink_project)
+# You must explicitly set where the pico-sdk is
+set(PICO_SDK_PATH ../pico-sdk)
 
-set(PICO_SDK_PATH $ENV{PICO_SDK_PATH})
-
+# Include the SDK
 include(${PICO_SDK_PATH}/pico_sdk_init.cmake)
 
+# Initialize the SDK
+pico_sdk_init()
+
+# Add the executable
 add_executable(blink
     blink.c
 )
 
-pico_sdk_init()
-
-# Add correct architecture options
-target_compile_definitions(blink PRIVATE
-    PICO_TARGET_M33
-)
-
+# Tell CMake/GCC we are using Cortex-M33 (not M0+)
 target_compile_options(blink PRIVATE
     -mcpu=cortex-m33
     -mthumb
@@ -26,6 +24,13 @@ target_compile_options(blink PRIVATE
     -mfpu=fpv5-sp-d16
 )
 
+# Define for your code if needed
+target_compile_definitions(blink PRIVATE
+    PICO_TARGET_RP2350
+)
+
+# Link the standard Pico libraries
 target_link_libraries(blink pico_stdlib)
 
+# Create binary, hex, uf2 files
 pico_add_extra_outputs(blink)
