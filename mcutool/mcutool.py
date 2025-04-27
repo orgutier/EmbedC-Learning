@@ -1,4 +1,4 @@
-import argparse
+from tools.argparse_handler import CustomArgumentParser
 import os
 import sys
 from tools import enterboot, enterapp
@@ -28,7 +28,7 @@ def main(args=None):
         log.log(level = log.WARN, message = "taskid was not defined, using default")
         log.log( level = log.WARN, message = f"Error: {notifyid}")
 
-    parser = argparse.ArgumentParser(
+    parser = CustomArgumentParser(
         description="MCU control tool")
     group = parser.add_mutually_exclusive_group(required=True)
 
@@ -45,13 +45,15 @@ def main(args=None):
     if args == None:
         args = sys.argv[1:]
     scriptargs, unknown = parser.parse_known_args(args)
-
+    if unknown:
+        log.log(level = log.INFO, message = f"mcutool unrecognized args: {unknown}")
+    
     if scriptargs.enterboot:
         log.log(level = log.INFO, message = f"Calling enterboot script with {unknown} arguments")
         try:
             enterboot.main(unknown)
         except Exception as e:
-            log.log(level = log.ERROR, message = f"enterboot script was not able to be completed: {e}")
+            log.log(level = log.CRITICAL, message = f"enterboot script was not able to be completed: {e}")
             sys.exit(1)
 
     elif scriptargs.enterapp:
@@ -59,7 +61,7 @@ def main(args=None):
         try:
             enterapp.main(unknown)
         except Exception as e:
-            log.log(level = log.ERROR, message = f"enterapp script was not able to be completed: {e}")
+            log.log(level = log.CRITICAL, message = f"enterapp script was not able to be completed: {e}")
             sys.exit(1)
 
     log.log(level = log.INFO, message = "mcutool completed as expected")

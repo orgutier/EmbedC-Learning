@@ -3,7 +3,7 @@ from time import sleep
 from tools.logger import logger
 import os
 import sys
-import argparse
+from tools.argparse_handler import CustomArgumentParser
 
 def main(args=None):
     default_reset = 27
@@ -35,7 +35,7 @@ def main(args=None):
     log.log(level = log.DEBUG, message = f"appname|taskid -- {log.appname}|{log.taskid}",)
 
     # ------------ Define pins by parse or default
-    parser = argparse.ArgumentParser(
+    parser = CustomArgumentParser(
         description="Enter App mode by setting reset and boot pins")
     parser.add_argument(
         '--resetpin', 
