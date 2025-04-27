@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.13)
 project(blink_rp2350)
 
 # You must explicitly set where the pico-sdk is
-set(PICO_SDK_PATH ../pico-sdk)
+set(PICO_SDK_PATH ${PICO_SDK_PATH})
 
 # Include the SDK
 include(${PICO_SDK_PATH}/pico_sdk_init.cmake)
