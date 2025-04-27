@@ -62,7 +62,7 @@ def main(args=None):
             log.log(level = log.ERROR, message = f"enterapp script was not able to be completed: {e}")
             sys.exit(1)
 
-    log.log(level = log.INFO, message = f"mcutool completed as expected")
+    log.log(level = log.INFO, message = "mcutool completed as expected")
     sys.exit(0)
 
 if __name__=='__main__':
