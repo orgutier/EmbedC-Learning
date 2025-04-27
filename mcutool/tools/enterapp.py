@@ -9,28 +9,10 @@ def main(args=None):
     default_reset = 27
     default_boot = 4
 
-    log = logger()
-    notifyname = None
-    notifyid = None
-    try:
-        log.appname = os.path.basename(__file__)
-    except Exception as e:
-        # No problem, use default
-        log.appname = "enterapp"
-        notifyname = e
-    try:
-        log.taskid = int(os.getpid())
-    except Exception as e:
-        # No problem, use default
-        log.taskid = 1111
-        notifyid = e
-
-    if notifyname:
-        log.log( level = log.WARN, message = "appname was not defined, using default")
-        log.log( level = log.WARN, message = f"Error: {notifyname}")
-    if notifyid:
-        log.log(level = log.WARN, message = "taskid was not defined, using default")
-        log.log( level = log.WARN, message = f"Error: {notifyid}")
+    log = logger.logger(
+        appname = os.path.basename(__file__),
+        taskid = int(os.getpid())
+    )
 
     log.log(level = log.DEBUG, message = f"appname|taskid -- {log.appname}|{log.taskid}",)
 

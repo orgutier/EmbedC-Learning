@@ -1,7 +1,7 @@
 from datetime import datetime
 
 class logger:
-    def __init__(self):
+    def __init__(self, appname=None, taskid=None):
         """
         Logging levels 
         Level		:: 	Meaning				::  	Use for
@@ -22,9 +22,11 @@ class logger:
         }
         for level in self.levels:
             setattr(self, self.levels[level], level)
-        # Reference
-        self.taskid = ""
-        self.appname = ""
+        # Defaults
+        if type(taskid)!=int:
+            self.taskid = 0000
+        elif type(appname)!=str:
+            self.appname = "NotDefined"
         self.logginglevel = 4
         self.appnamesource = "both" # Can be "id", "name" or "both"
 

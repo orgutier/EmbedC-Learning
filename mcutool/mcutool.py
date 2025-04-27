@@ -5,28 +5,10 @@ from tools import enterboot, enterapp
 from tools.logger import logger
 
 def main(args=None):
-    log = logger()
-    notifyname = None
-    notifyid = None
-    try:
-        log.appname = os.path.basename(__file__)
-    except Exception as e:
-        # No problem, use default
-        log.appname = "mcutool"
-        notifyname = e
-    try:
-        log.taskid = int(os.getpid())
-    except Exception as e:
-        # No problem, use default
-        log.taskid = 0000
-        notifyid = e
-
-    if notifyname:
-        log.log( level = log.WARN, message = "appname was not defined, using default")
-        log.log( level = log.WARN, message = f"Error: {notifyname}")
-    if notifyid:
-        log.log(level = log.WARN, message = "taskid was not defined, using default")
-        log.log( level = log.WARN, message = f"Error: {notifyid}")
+    log = logger.logger(
+        appname = os.path.basename(__file__),
+        taskid = int(os.getpid())
+    )
 
     parser = CustomArgumentParser(
         description="MCU control tool")
