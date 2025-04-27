@@ -11,4 +11,3 @@ class CustomArgumentParser(argparse.ArgumentParser):
         )
         self.log.log(level=self.log.CRITICAL, message=f"Argument parsing error: {message}")
         # self.print_help()
-        sys.exit(2)
