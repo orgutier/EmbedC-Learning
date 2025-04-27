@@ -1,13 +1,15 @@
 cmake_minimum_required(VERSION 3.13)
 
-project(blink_rp2350)
 
 # You must explicitly set where the pico-sdk is
 set(PICO_SDK_PATH ${PICO_SDK_PATH})
+set(PICO_BOARD pico2_w CACHE STRING "Board type")
 
 # Include the SDK
 include(${PICO_SDK_PATH}/pico_sdk_init.cmake)
+include(pico_sdk_import.cmake)
 
+project(blink C CXX ASM)
 # Initialize the SDK
 pico_sdk_init()
 
