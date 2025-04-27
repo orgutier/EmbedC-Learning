@@ -10,5 +10,5 @@ class CustomArgumentParser(argparse.ArgumentParser):
             taskid = int(os.getpid())
         )
         self.log.log(level=self.log.CRITICAL, message=f"Argument parsing error: {message}")
-        raise SystemExit (f"Parsing error {message}")
+        raise SystemExit (f"Parsing error: {message}")
         # self.print_help()
