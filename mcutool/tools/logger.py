@@ -31,6 +31,8 @@ class logger:
             self.appname = "NotDefined"
         else:
             self.appname = appname
+        self.maxapplogged = 25 # The logger will actually print 2 characters less to fit '..' as reference
+        self.maxlevellogged = 8
         self.logginglevel = 4
         self.appnamesource = "both" # Can be "id", "name" or "both"
 
@@ -61,5 +63,9 @@ class logger:
             app = f"{self.taskid}|{self.appname}"
         loglevel = self.levels[level]
         # Create log string
-        logstring = f"[{formatteddate}] [{app}] [{loglevel}] {message}"
+        if len(app) > (self.maxapplogged-2): # To dots printed when unable to show it all
+            app = app[:self.maxapplogged-2] + '..'
+        alignapp = " "*(self.maxapplogged - len(app))
+        alignlevel = " "*(self.maxlevellogged - len(loglevel))
+        logstring = f"[{formatteddate}] [{app}]{alignapp} [{loglevel}]{alignlevel} {message}"
         print(logstring)
