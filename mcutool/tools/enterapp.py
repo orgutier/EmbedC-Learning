@@ -47,9 +47,11 @@ def main(args=None):
         type=int, 
         default=default_boot, 
         help='GPIO pin for boot')
+    
     if args == None:
-        args = sys.argv
+        args = sys.argv[1:]
     args = parser.parse_args(args)
+
     reset = args.resetpin
     boot = args.bootpin
 

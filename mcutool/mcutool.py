@@ -43,7 +43,7 @@ def main(args=None):
         help='Put MCU into app mode')
 
     if args == None:
-        args = sys.argv
+        args = sys.argv[1:]
     scriptargs, unknown = parser.parse_known_args(args)
 
     if scriptargs.enterboot:

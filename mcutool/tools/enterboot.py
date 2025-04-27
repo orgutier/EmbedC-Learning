@@ -49,7 +49,7 @@ def main(args=None):
         help='GPIO pin for boot')
 
     if args == None:
-        args = sys.argv
+        args = sys.argv[1:]
     args = parser.parse_args(args)
 
     reset = args.resetpin
