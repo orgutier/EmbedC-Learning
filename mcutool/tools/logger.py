@@ -70,6 +70,8 @@ class logger:
         alignlevel = " "*(self.maxlevellogged - len(loglevel))
         # Break message into slided messages based on arbitrary size
         for idx in range(0, len(message), self.maxmessagelogged):
+            if (idx + self.maxmessagelogged) == len(message):
+                continue
             if idx == 0:
                 printed = ''
             else:
