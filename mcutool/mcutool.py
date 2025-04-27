@@ -5,7 +5,7 @@ from tools import enterboot, enterapp
 from tools.logger import logger
 
 def main(args=None):
-    log = logger.logger(
+    log = logger(
         appname = os.path.basename(__file__),
         taskid = int(os.getpid())
     )

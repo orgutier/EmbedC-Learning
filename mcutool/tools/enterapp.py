@@ -9,7 +9,7 @@ def main(args=None):
     default_reset = 27
     default_boot = 4
 
-    log = logger.logger(
+    log = logger(
         appname = os.path.basename(__file__),
         taskid = int(os.getpid())
     )

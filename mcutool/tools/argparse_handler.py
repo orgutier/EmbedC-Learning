@@ -1,11 +1,11 @@
 import argparse
 import sys
 import os
-from tools import logger
+from tools.logger import logger
 
 class CustomArgumentParser(argparse.ArgumentParser):
     def error(self, message):
-        self.log = logger.logger(
+        self.log = logger(
             appname = os.path.basename(__file__),
             taskid = int(os.getpid())
         )
