@@ -25,16 +25,5 @@ pico_sdk_init()
 
 include(${PICO_EXAMPLES_PATH}example_auto_set_url.cmake)
 
-# Add blink example
-add_subdirectory_exclude_platforms(blink)
-
-add_compile_options(-Wall
-        -Wno-format          # int != int32_t as far as the compiler is concerned because gcc has int32_t as long int
-        -Wno-unused-function # we have some for the docs that aren't called
-        )
-if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
-    add_compile_options(-Wno-maybe-uninitialized)
-endif()
-
 # Hardware-specific examples in subdirectories:
 add_subdirectory(blink)
