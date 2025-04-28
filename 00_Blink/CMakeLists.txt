@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.12)
 
 # Pull in SDK (must be before project)
-include(${PICO_EXAMPLES_PATH}pico_sdk_import.cmake)
-include(${PICO_EXAMPLES_PATH}pico_extras_import_optional.cmake)
+include(${PICO_EXAMPLES_PATH}/pico_sdk_import.cmake)
+include(${PICO_EXAMPLES_PATH}/pico_extras_import_optional.cmake)
 
 project(00_blink C CXX ASM)
 
@@ -23,7 +23,7 @@ endif()
 # Initialize the SDK
 pico_sdk_init()
 
-include(${PICO_EXAMPLES_PATH}example_auto_set_url.cmake)
+include(${PICO_EXAMPLES_PATH}/example_auto_set_url.cmake)
 
 # Hardware-specific examples in subdirectories:
 add_subdirectory(blink)
