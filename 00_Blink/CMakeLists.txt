@@ -38,7 +38,7 @@ endif()
 # add_subdirectory(00_blink)
 
 add_executable(00_blink
-00_blink.c
+    blink.c
     )
 
 # pull in common dependencies
