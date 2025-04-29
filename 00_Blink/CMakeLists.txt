@@ -25,7 +25,7 @@ pico_sdk_init()
 
 include(example_auto_set_url.cmake)
 
-add_subdirectory(00_blink)
+add_subdirectory(build)
 
 # add_subdirectory_exclude_platforms(00_blink) 
 
