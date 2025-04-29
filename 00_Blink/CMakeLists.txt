@@ -25,7 +25,7 @@ pico_sdk_init()
 
 include(example_auto_set_url.cmake)
 
-add_subdirectory_exclude_platforms(00_blink) 
+# add_subdirectory_exclude_platforms(00_blink) 
 
 add_compile_options(-Wall
         -Wno-format          # int != int32_t as far as the compiler is concerned because gcc has int32_t as long >        -Wno-unused-function # we have some for the docs that aren't called
