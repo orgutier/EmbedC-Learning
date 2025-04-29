@@ -37,15 +37,15 @@ endif()
 # Hardware-specific examples in subdirectories:
 # add_subdirectory(00_blink)
 
-add_executable(blink
-    blink.c
+add_executable(00_blink
+00_blink.c
     )
 
 # pull in common dependencies
-target_link_libraries(blink pico_stdlib)
+target_link_libraries(00_blink pico_stdlib)
 
 if (PICO_CYW43_SUPPORTED)
-    target_link_libraries(blink pico_cyw43_arch_none)
+    target_link_libraries(00_blink pico_cyw43_arch_none)
 endif()
 
 # create map/bin/hex file etc.
