@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.12)
 
 # Pull in SDK (must be before project)
-include(${PICO_EXAMPLES_PATH}/pico_sdk_import.cmake)
-include(${PICO_EXAMPLES_PATH}/pico_extras_import_optional.cmake)
+include(pico_sdk_import.cmake)
+include(pico_extras_import_optional.cmake)
 
 project(00_blink C CXX ASM)
 
@@ -13,7 +13,7 @@ if (PICO_SDK_VERSION_STRING VERSION_LESS "2.1.0")
     message(FATAL_ERROR "Raspberry Pi Pico SDK version 2.1.0 (or later) required. Your version is ${PICO_SDK_VERSION_STRING}")
 endif()
 
-set(PICO_EXAMPLES_PATH ${PICO_EXAMPLES_PATH})
+set(PICO_EXAMPLES_PATH ${PROJECT_SOURCE_DIR})
 
 # If you want debug output from USB (pass -DPICO_STDIO_USB=1) this ensures you don't lose any debug output while USB is set up
 if (NOT DEFINED PICO_STDIO_USB_CONNECT_WAIT_TIMEOUT_MS)
@@ -23,7 +23,7 @@ endif()
 # Initialize the SDK
 pico_sdk_init()
 
-include(${PICO_EXAMPLES_PATH}/example_auto_set_url.cmake)
+include(example_auto_set_url.cmake)
 
 # Hardware-specific examples in subdirectories:
-add_subdirectory(blink)
+# add_subdirectory(00_blink)
