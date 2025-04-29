@@ -18,6 +18,7 @@
 #define FRAC_BITS 4
 #define NUM_PIXELS 64
 #define WS2812_PIN_BASE 2
+#define CUSTOM_PIN 22
 
 // Check the pin is compatible with the platform
 #if WS2812_PIN_BASE >= NUM_BANK0_GPIOS
@@ -283,7 +284,7 @@ void output_strips_dma(value_bits_t *bits, uint value_length) {
 int main() {
     //set_sys_clock_48();
     stdio_init_all();
-    printf("WS2812 parallel using pin %d\n", WS2812_PIN_BASE);
+    printf("WS2812 parallel using pin %d\n", CUSTOM_PIN);
 
     PIO pio;
     uint sm;
@@ -292,10 +293,10 @@ int main() {
     // This will find a free pio and state machine for our program and load it for us
     // We use pio_claim_free_sm_and_add_program_for_gpio_range (for_gpio_range variant)
     // so we will get a PIO instance suitable for addressing gpios >= 32 if needed and supported by the hardware
-    bool success = pio_claim_free_sm_and_add_program_for_gpio_range(&ws2812_parallel_program, &pio, &sm, &offset, WS2812_PIN_BASE, count_of(strips), true);
+    bool success = pio_claim_free_sm_and_add_program_for_gpio_range(&ws2812_parallel_program, &pio, &sm, &offset, CUSTOM_PIN, count_of(strips), true);
     hard_assert(success);
 
-    ws2812_parallel_program_init(pio, sm, offset, WS2812_PIN_BASE, count_of(strips), 800000);
+    ws2812_parallel_program_init(pio, sm, offset, CUSTOM_PIN, count_of(strips), 800000);
 
     sem_init(&reset_delay_complete_sem, 1, 1); // initially posted so we don't block first time
     dma_init(pio, sm);
