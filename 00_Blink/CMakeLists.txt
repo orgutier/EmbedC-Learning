@@ -25,8 +25,6 @@ pico_sdk_init()
 
 include(example_auto_set_url.cmake)
 
-add_subdirectory(build)
-
 # add_subdirectory_exclude_platforms(00_blink) 
 
 add_compile_options(-Wall
@@ -38,3 +36,20 @@ endif()
 
 # Hardware-specific examples in subdirectories:
 # add_subdirectory(00_blink)
+
+add_executable(blink
+    blink.c
+    )
+
+# pull in common dependencies
+target_link_libraries(blink pico_stdlib)
+
+if (PICO_CYW43_SUPPORTED)
+    target_link_libraries(blink pico_cyw43_arch_none)
+endif()
+
+# create map/bin/hex file etc.
+pico_add_extra_outputs(00_blink)
+
+# add url via pico_set_program_url
+example_auto_set_url(00_blink)
