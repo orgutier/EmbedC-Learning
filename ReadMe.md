@@ -29,7 +29,7 @@ cmake ../ -DPICO_BOARD=pico2 -DCMAKE_BUILD_TYPE=Debug
 
 ---- Upload and test code
 // One terminal
-sudo openocd -f interface/cmsis-dap.cfg -f target/rp2040.cfg -c "adapter speed 5000"
+sudo openocd -f interface/cmsis-dap.cfg -f target/rp2350.cfg -c "adapter speed 5000"
 // Another
 gdb blink.elf
 target remote localhost:3333
@@ -39,3 +39,13 @@ continue
 
 ---- Use owned mcutool to reset
 python ~/EmbedC-Learning/mcutool/mcutool.py --enterapp
+
+---- Opening remote openocd
+Map ssh tunnel to localhost:3333
+Use "Pico Debug (Cortex-Debug with external OpenOCD)" configuration
+
+---- Open remote terminal
+ls /dev/tty* // See available terminals
+sudo apt install minicom
+minicom -b 115200 -D /dev/ttyACM0
+CTRL+A then X // To leave terminal
